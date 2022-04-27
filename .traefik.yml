@@ -1,0 +1,10 @@
+displayName: QueryParameter to Header Middleware
+type: middleware
+
+import: github.com/corticph/queryparameter-to-header
+
+summary: 'Add a header with the value of a given URL query parameter'
+
+testData:
+  queryParameter: "v"
+  header: "X-Version"
