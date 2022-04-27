@@ -16,14 +16,14 @@ experimental:
 
 http:
 [...]
-
-  services:
+  routers:
     whoami:
-      loadBalancer:
-        servers:
-          - url: "http://traefik-whoami-1:80"
-        middlewares:
-          - add-header-from-query
+      rule: "Host(`whoami.localhost`)"
+      service: "whoami"
+      entryPoints:
+        - web
+      middlewares:
+        - add-header-from-query
   
   middlewares:
     add-header-from-query:
