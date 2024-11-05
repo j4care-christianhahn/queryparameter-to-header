@@ -27,6 +27,7 @@ type QueryParameterToHeaderMiddleware struct {
 	next           http.Handler
 	queryParameter string
 	header         string
+        prefix         string
 	name           string
 }
 
@@ -42,6 +43,7 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 	return &QueryParameterToHeaderMiddleware{
 		header:         config.Header,
 		queryParameter: config.QueryParameter,
+                prefix:         config.Prefix,
 		next:           next,
 		name:           name,
 	}, nil
