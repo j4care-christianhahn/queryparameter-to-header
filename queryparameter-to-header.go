@@ -53,7 +53,8 @@ func (m *QueryParameterToHeaderMiddleware) ServeHTTP(rw http.ResponseWriter, req
 	if len(parameterValues) > 0 {
 	     if len(m.prefix) > 0 {
 		 req.Header.Set(m.header, prefix + parameterValues[0])
-             else
+             }
+             else {
                  req.Header.Set(m.header, parameterValues[0])
              }
 	}
