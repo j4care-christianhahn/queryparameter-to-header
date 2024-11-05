@@ -54,8 +54,10 @@ func (m *QueryParameterToHeaderMiddleware) ServeHTTP(rw http.ResponseWriter, req
 	parameterValues := query[m.queryParameter]
 	if len(parameterValues) > 0 {
 	     if len(m.prefix) > 0 {
+                 fmt.Println("Setting Header with Prefix: %s",(m.prefix + parameterValues[0]))
 		 req.Header.Set(m.header, m.prefix + parameterValues[0])
              } else {
+                 fmt.Println("Setting Header: %s",parameterValues[0])
                  req.Header.Set(m.header, parameterValues[0])
              }
 	}
