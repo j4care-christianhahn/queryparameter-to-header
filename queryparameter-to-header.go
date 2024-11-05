@@ -11,6 +11,7 @@ import (
 type Config struct {
 	QueryParameter string `json:"query_parameter"`
 	Header         string `json:"header"`
+        Prefix         string `json:"prefix"`
 }
 
 // CreateConfig creates the default plugin configuration
@@ -18,6 +19,7 @@ func CreateConfig() *Config {
 	return &Config{
 		QueryParameter: "v",
 		Header:         "X-Version",
+                Prefix:         "",
 	}
 }
 
@@ -49,7 +51,11 @@ func (m *QueryParameterToHeaderMiddleware) ServeHTTP(rw http.ResponseWriter, req
 	query := req.URL.Query()
 	parameterValues := query[m.queryParameter]
 	if len(parameterValues) > 0 {
-		req.Header.Set(m.header, parameterValues[0])
+	     if len(m.prefix) > 0 {
+		 req.Header.Set(m.header, prefix + parameterValues[0])
+             else
+                 req.Header.Set(m.header, parameterValues[0])
+             }
 	}
 	m.next.ServeHTTP(rw, req)
 }
